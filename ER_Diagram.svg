@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" width="1400" height="1000">
+  <defs>
+    <style>
+      .title { font: bold 18px Arial; fill: #1a3a5c; }
+      .entity { fill: #d6e8f7; stroke: #1a6aad; stroke-width:2; rx:6; }
+      .entity-head { fill: #1a6aad; }
+      .entity-text { font: bold 12px Arial; fill: white; }
+      .attr { font: 11px Arial; fill: #1a3a5c; }
+      .pk { font: bold 11px Arial; fill: #c0392b; }
+      .fk { font: 11px Arial; fill: #7d3c98; }
+      .line { stroke: #555; stroke-width:1.5; fill:none; marker-end:url(#arr); }
+      .label { font: 10px Arial; fill:#555; }
+    </style>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#555"/>
+    </marker>
+  </defs>
+  <rect width="1400" height="1000" fill="#f8fbff"/>
+  <text x="700" y="30" class="title" text-anchor="middle">Football Club Database – ER Diagram</text>
+
+  <!-- CLUB -->
+  <rect x="20" y="55" width="160" height="130" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="20" y="55" width="160" height="22" rx="6" fill="#1a6aad"/>
+  <text x="100" y="71" class="entity-text" text-anchor="middle">CLUB</text>
+  <text x="28" y="91"  class="pk">PK club_id SERIAL</text>
+  <text x="28" y="106" class="attr">   name VARCHAR UNIQUE</text>
+  <text x="28" y="121" class="attr">   country VARCHAR</text>
+  <text x="28" y="136" class="attr">   founded_year SMALLINT</text>
+  <text x="28" y="151" class="attr">   budget_eur NUMERIC</text>
+  <text x="28" y="166" class="attr">   website VARCHAR</text>
+
+  <!-- STADIUM -->
+  <rect x="210" y="55" width="165" height="130" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="210" y="55" width="165" height="22" rx="6" fill="#1a6aad"/>
+  <text x="292" y="71" class="entity-text" text-anchor="middle">STADIUM</text>
+  <text x="218" y="91"  class="pk">PK stadium_id SERIAL</text>
+  <text x="218" y="106" class="attr">   name VARCHAR UNIQUE</text>
+  <text x="218" y="121" class="attr">   city VARCHAR</text>
+  <text x="218" y="136" class="attr">   country VARCHAR</text>
+  <text x="218" y="151" class="attr">   capacity INT</text>
+  <text x="218" y="166" class="attr">   surface VARCHAR</text>
+
+  <!-- TEAM -->
+  <rect x="115" y="235" width="175" height="115" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="115" y="235" width="175" height="22" rx="6" fill="#1a6aad"/>
+  <text x="202" y="251" class="entity-text" text-anchor="middle">TEAM</text>
+  <text x="123" y="272" class="pk">PK team_id SERIAL</text>
+  <text x="123" y="287" class="fk">FK club_id → CLUB</text>
+  <text x="123" y="302" class="fk">FK stadium_id → STADIUM</text>
+  <text x="123" y="317" class="attr">   name VARCHAR</text>
+  <text x="123" y="332" class="attr">   type VARCHAR</text>
+
+  <!-- POSITION -->
+  <rect x="20" y="420" width="165" height="100" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="20" y="420" width="165" height="22" rx="6" fill="#1a6aad"/>
+  <text x="102" y="436" class="entity-text" text-anchor="middle">POSITION</text>
+  <text x="28" y="457" class="pk">PK position_id SERIAL</text>
+  <text x="28" y="472" class="attr">   name VARCHAR UNIQUE</text>
+  <text x="28" y="487" class="attr">   abbreviation CHAR(3)</text>
+  <text x="28" y="502" class="attr">   category VARCHAR</text>
+
+  <!-- PLAYER -->
+  <rect x="220" y="420" width="175" height="145" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="220" y="420" width="175" height="22" rx="6" fill="#1a6aad"/>
+  <text x="307" y="436" class="entity-text" text-anchor="middle">PLAYER</text>
+  <text x="228" y="457" class="pk">PK player_id SERIAL</text>
+  <text x="228" y="472" class="fk">FK team_id → TEAM</text>
+  <text x="228" y="487" class="fk">FK position_id → POSITION</text>
+  <text x="228" y="502" class="attr">   first_name, last_name</text>
+  <text x="228" y="517" class="attr">   date_of_birth, nationality</text>
+  <text x="228" y="532" class="attr">   jersey_number SMALLINT</text>
+  <text x="228" y="547" class="attr">   market_value_eur, is_active</text>
+
+  <!-- COACH -->
+  <rect x="20" y="565" width="165" height="115" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="20" y="565" width="165" height="22" rx="6" fill="#1a6aad"/>
+  <text x="102" y="581" class="entity-text" text-anchor="middle">COACH</text>
+  <text x="28" y="602" class="pk">PK coach_id SERIAL</text>
+  <text x="28" y="617" class="fk">FK team_id → TEAM</text>
+  <text x="28" y="632" class="attr">   first_name, last_name</text>
+  <text x="28" y="647" class="attr">   nationality, role</text>
+  <text x="28" y="662" class="attr">   hired_date DATE</text>
+
+  <!-- STAFF -->
+  <rect x="20" y="730" width="165" height="100" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="20" y="730" width="165" height="22" rx="6" fill="#1a6aad"/>
+  <text x="102" y="746" class="entity-text" text-anchor="middle">STAFF</text>
+  <text x="28" y="767" class="pk">PK staff_id SERIAL</text>
+  <text x="28" y="782" class="fk">FK club_id → CLUB</text>
+  <text x="28" y="797" class="attr">   first_name, last_name</text>
+  <text x="28" y="812" class="attr">   role, department</text>
+
+  <!-- COMPETITION -->
+  <rect x="550" y="55" width="175" height="115" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="550" y="55" width="175" height="22" rx="6" fill="#1a6aad"/>
+  <text x="637" y="71" class="entity-text" text-anchor="middle">COMPETITION</text>
+  <text x="558" y="92"  class="pk">PK competition_id SERIAL</text>
+  <text x="558" y="107" class="attr">   name VARCHAR UNIQUE</text>
+  <text x="558" y="122" class="attr">   type VARCHAR</text>
+  <text x="558" y="137" class="attr">   country VARCHAR</text>
+  <text x="558" y="152" class="attr">   tier SMALLINT</text>
+
+  <!-- SEASON -->
+  <rect x="550" y="220" width="175" height="115" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="550" y="220" width="175" height="22" rx="6" fill="#1a6aad"/>
+  <text x="637" y="236" class="entity-text" text-anchor="middle">SEASON</text>
+  <text x="558" y="257" class="pk">PK season_id SERIAL</text>
+  <text x="558" y="272" class="fk">FK competition_id → COMPETITION</text>
+  <text x="558" y="287" class="attr">   label VARCHAR</text>
+  <text x="558" y="302" class="attr">   start_date, end_date DATE</text>
+
+  <!-- MATCH -->
+  <rect x="750" y="220" width="195" height="160" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="750" y="220" width="195" height="22" rx="6" fill="#1a6aad"/>
+  <text x="847" y="236" class="entity-text" text-anchor="middle">MATCH</text>
+  <text x="758" y="257" class="pk">PK match_id SERIAL</text>
+  <text x="758" y="272" class="fk">FK season_id → SEASON</text>
+  <text x="758" y="287" class="fk">FK stadium_id → STADIUM</text>
+  <text x="758" y="302" class="fk">FK home_team_id → TEAM</text>
+  <text x="758" y="317" class="fk">FK away_team_id → TEAM</text>
+  <text x="758" y="332" class="attr">   match_date TIMESTAMPTZ</text>
+  <text x="758" y="347" class="attr">   home_goals, away_goals</text>
+  <text x="758" y="362" class="attr">   status VARCHAR</text>
+
+  <!-- CONTRACT -->
+  <rect x="430" y="580" width="175" height="115" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="430" y="580" width="175" height="22" rx="6" fill="#1a6aad"/>
+  <text x="517" y="596" class="entity-text" text-anchor="middle">CONTRACT</text>
+  <text x="438" y="617" class="pk">PK contract_id SERIAL</text>
+  <text x="438" y="632" class="fk">FK player_id → PLAYER</text>
+  <text x="438" y="647" class="fk">FK club_id → CLUB</text>
+  <text x="438" y="662" class="attr">   start_date, end_date DATE</text>
+  <text x="438" y="677" class="attr">   salary_eur_pm, release_clause</text>
+
+  <!-- PLAYER_STAT -->
+  <rect x="750" y="450" width="195" height="130" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="750" y="450" width="195" height="22" rx="6" fill="#1a6aad"/>
+  <text x="847" y="466" class="entity-text" text-anchor="middle">PLAYER_STAT</text>
+  <text x="758" y="487" class="pk">PK stat_id SERIAL</text>
+  <text x="758" y="502" class="fk">FK match_id → MATCH</text>
+  <text x="758" y="517" class="fk">FK player_id → PLAYER</text>
+  <text x="758" y="532" class="attr">   goals, assists SMALLINT</text>
+  <text x="758" y="547" class="attr">   yellow_cards, red_cards</text>
+  <text x="758" y="562" class="attr">   minutes_played, rating</text>
+
+  <!-- TEAM_STAT -->
+  <rect x="1000" y="450" width="195" height="145" rx="6" fill="#d6e8f7" stroke="#1a6aad" stroke-width="2"/>
+  <rect x="1000" y="450" width="195" height="22" rx="6" fill="#1a6aad"/>
+  <text x="1097" y="466" class="entity-text" text-anchor="middle">TEAM_STAT</text>
+  <text x="1008" y="487" class="pk">PK team_stat_id SERIAL</text>
+  <text x="1008" y="502" class="fk">FK match_id → MATCH</text>
+  <text x="1008" y="517" class="fk">FK team_id → TEAM</text>
+  <text x="1008" y="532" class="attr">   possession_pct NUMERIC</text>
+  <text x="1008" y="547" class="attr">   shots_total, shots_on_target</text>
+  <text x="1008" y="562" class="attr">   corners, fouls, offsides</text>
+
+  <!-- Relationship lines -->
+  <!-- CLUB → TEAM -->
+  <line x1="100" y1="185" x2="180" y2="235" class="line"/>
+  <text x="115" y="220" class="label">1</text><text x="168" y="233" class="label">N</text>
+
+  <!-- STADIUM → TEAM -->
+  <line x1="292" y1="185" x2="260" y2="235" class="line"/>
+  <text x="282" y="220" class="label">1</text><text x="255" y="233" class="label">N</text>
+
+  <!-- TEAM → PLAYER -->
+  <line x1="202" y1="350" x2="307" y2="420" class="line"/>
+  <text x="208" y="390" class="label">1</text><text x="298" y="418" class="label">N</text>
+
+  <!-- POSITION → PLAYER -->
+  <line x1="185" y1="470" x2="220" y2="490" class="line"/>
+  <text x="193" y="485" class="label">1</text><text x="217" y="490" class="label">N</text>
+
+  <!-- TEAM → COACH -->
+  <line x1="150" y1="350" x2="102" y2="565" class="line"/>
+  <text x="138" y="465" class="label">1</text><text x="103" y="560" class="label">N</text>
+
+  <!-- CLUB → STAFF -->
+  <line x1="60" y1="185" x2="80" y2="730" class="line"/>
+  <text x="62" y="460" class="label">1</text><text x="72" y="725" class="label">N</text>
+
+  <!-- COMPETITION → SEASON -->
+  <line x1="637" y1="170" x2="637" y2="220" class="line"/>
+  <text x="642" y="198" class="label">1</text><text x="642" y="218" class="label">N</text>
+
+  <!-- SEASON → MATCH -->
+  <line x1="725" y1="280" x2="750" y2="300" class="line"/>
+  <text x="730" y="290" class="label">1</text><text x="748" y="300" class="label">N</text>
+
+  <!-- TEAM → MATCH (home) -->
+  <line x1="290" y1="295" x2="750" y2="310" class="line"/>
+  <text x="310" y="302" class="label">1</text><text x="746" y="310" class="label">N</text>
+
+  <!-- STADIUM → MATCH -->
+  <line x1="375" y1="120" x2="750" y2="265" class="line"/>
+  <text x="530" y="175" class="label">1</text><text x="746" y="262" class="label">N</text>
+
+  <!-- MATCH → PLAYER_STAT -->
+  <line x1="847" y1="380" x2="847" y2="450" class="line"/>
+  <text x="852" y="420" class="label">1</text><text x="852" y="448" class="label">N</text>
+
+  <!-- PLAYER → PLAYER_STAT -->
+  <line x1="395" y1="500" x2="750" y2="510" class="line"/>
+  <text x="410" y="498" class="label">1</text><text x="746" y="510" class="label">N</text>
+
+  <!-- MATCH → TEAM_STAT -->
+  <line x1="945" y1="340" x2="1097" y2="450" class="line"/>
+  <text x="960" y="390" class="label">1</text><text x="1092" y="448" class="label">N</text>
+
+  <!-- TEAM → TEAM_STAT -->
+  <line x1="290" y1="330" x2="1000" y2="500" class="line"/>
+  <text x="310" y="330" class="label">1</text><text x="996" y="500" class="label">N</text>
+
+  <!-- PLAYER → CONTRACT -->
+  <line x1="307" y1="565" x2="490" y2="580" class="line"/>
+  <text x="330" y="575" class="label">1</text><text x="486" y="578" class="label">N</text>
+
+  <!-- CLUB → CONTRACT -->
+  <line x1="100" y1="185" x2="490" y2="620" class="line"/>
+  <text x="220" y="340" class="label">1</text><text x="485" y="617" class="label">N</text>
+
+  <!-- Legend -->
+  <rect x="1150" y="55" width="220" height="100" rx="6" fill="#fffbe6" stroke="#f0ad4e" stroke-width="1.5"/>
+  <text x="1260" y="74" font-size="12" font-weight="bold" fill="#555" text-anchor="middle">Legend</text>
+  <text x="1158" y="92"  font-size="11" fill="#c0392b" font-weight="bold">PK = Primary Key</text>
+  <text x="1158" y="107" font-size="11" fill="#7d3c98">FK = Foreign Key</text>
+  <line x1="1158" y1="120" x2="1198" y2="120" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="1205" y="124" font-size="11" fill="#555">Relationship</text>
+  <text x="1158" y="142" font-size="10" fill="#555">N = Many   1 = One</text>
+</svg>
